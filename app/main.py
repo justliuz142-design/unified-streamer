@@ -165,8 +165,8 @@ async def serve_file(request: web.Request) -> web.StreamResponse:
     encoded_name = quote(target.name, safe="")
     headers = {
         "Content-Disposition": (
-            f"attachment; filename="{target.name}"; "
-            f"filename*=UTF-8\'\'{encoded_name}"
+            f'attachment; filename="{target.name}"; '
+            f"filename*=UTF-8''{encoded_name}"
         ),
         "Cache-Control": "no-store",
     }
