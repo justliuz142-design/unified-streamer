@@ -287,7 +287,13 @@
     if (job.status === 'finished') {
       cancelBtn.classList.add('hidden');
       if (job.download_url) {
+        // The server already URL-encodes the path (so '#' becomes '%23' etc.)
+        // We set it directly — do NOT decode it here, the browser needs the
+        // encoded form to send the right HTTP request.
         downloadFileBtn.href = job.download_url;
+        // Set the 'download' attribute so the browser uses the real filename
+        // (without URL-encoding noise) when saving to disk.
+        if (job.filename) downloadFileBtn.setAttribute('download', job.filename);
         downloadFileBtn.classList.remove('hidden');
       }
       UI.toast('Download complete', 'success');

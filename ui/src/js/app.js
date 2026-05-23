@@ -50,8 +50,10 @@ const Lunar = (function () {
       row.className = 'history-item';
       row.style.cssText = 'padding:.75rem;border-bottom:1px solid var(--clr-border,#222);display:flex;flex-direction:column;gap:.25rem';
       const statusColor = j.status === 'finished' ? '#34d399' : j.status === 'error' ? '#f87171' : '#fbbf24';
+      // j.download_url is already URL-encoded by the server (e.g. '#' → '%23').
+      // We also set the 'download' attribute with the human-readable filename.
       const link = j.download_url
-        ? `<a href="${j.download_url}" download style="color:var(--clr-accent,#60a5fa);font-size:.85rem">Save file</a>`
+        ? `<a href="${j.download_url}" download="${escapeHtml(j.filename || '')}" style="color:var(--clr-accent,#60a5fa);font-size:.85rem">Save file</a>`
         : '';
       const date = j.finished_at ? new Date(j.finished_at * 1000).toLocaleString() : '';
       row.innerHTML = `
