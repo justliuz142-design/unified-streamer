@@ -1,0 +1,11 @@
+{
+  "name": "metube",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LunarMediaDL static frontend — built by copying src/ to dist/metube/ to satisfy the multi-stage Dockerfile.",
+  "scripts": {
+    "build": "node -e \"const fs=require('fs'),p=require('path');const src=p.join(__dirname,'src'),dst=p.join(__dirname,'dist','metube');fs.rmSync(dst,{recursive:true,force:true});fs.mkdirSync(dst,{recursive:true});function cp(s,d){for(const e of fs.readdirSync(s,{withFileTypes:true})){const sp=p.join(s,e.name),dp=p.join(d,e.name);if(e.isDirectory()){fs.mkdirSync(dp,{recursive:true});cp(sp,dp);}else fs.copyFileSync(sp,dp);}}cp(src,dst);console.log('built',dst);\"",
+    "lint": "echo 'no lint configured'",
+    "test": "echo 'no tests'"
+  }
+}
