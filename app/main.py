@@ -21,6 +21,7 @@ import asyncio
 import logging
 import mimetypes
 from pathlib import Path
+from urllib.parse import quote
 
 from aiohttp import web
 import socketio
@@ -159,10 +160,18 @@ async def serve_file(request: web.Request) -> web.StreamResponse:
     if not target.exists() or not target.is_file():
         return _json_error(404, "file not found")
     content_type, _ = mimetypes.guess_type(target.name)
+    # Use RFC 6266 encoded filename* parameter so special chars (# > < & spaces)
+    # are preserved correctly in all browsers.
+    encoded_name = quote(target.name, safe="")
     headers = {
-        "Content-Disposition": f'attachment; filename="{target.name}"',
+        "Content-Disposition": (
+            f"attachment; filename="{target.name}"; "
+            f"filename*=UTF-8\'\'{encoded_name}"
+        ),
         "Cache-Control": "no-store",
     }
+    if content_type:
+        headers["Content-Type"] = content_type
     return web.FileResponse(target, headers=headers)
 
 

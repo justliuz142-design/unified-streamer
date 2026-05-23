@@ -19,6 +19,7 @@ import uuid
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Optional
+from urllib.parse import quote
 
 import ytdl_engine
 from config import settings
@@ -240,7 +241,7 @@ class DownloadQueue:
                 final_path = self._resolve_final_path(outdir, info)
                 if final_path:
                     job.filename = str(final_path.name)
-                    job.download_url = f"/files/{job.id}/{final_path.name}"
+                    job.download_url = f"/files/{job.id}/{quote(final_path.name)}"
                 job.status = "finished"
                 job.progress = 100.0
                 job.finished_at = time.time()
