@@ -25,7 +25,7 @@ from typing import Any, Callable, Optional
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import DownloadError, ExtractorError
 
-from .config import settings
+from config import settings
 
 log = logging.getLogger("ytdl")
 

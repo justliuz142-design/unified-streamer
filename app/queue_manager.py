@@ -20,8 +20,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
-from . import ytdl_engine
-from .config import settings
+import ytdl_engine
+from config import settings
 
 log = logging.getLogger("queue")
 

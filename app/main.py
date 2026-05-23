@@ -25,10 +25,10 @@ from pathlib import Path
 from aiohttp import web
 import socketio
 
-from . import ytdl_engine
-from .cleanup import CleanupScheduler
-from .config import settings
-from .queue_manager import DownloadQueue
+import ytdl_engine
+from cleanup import CleanupScheduler
+from config import settings
+from queue_manager import DownloadQueue
 
 log = logging.getLogger("main")
 

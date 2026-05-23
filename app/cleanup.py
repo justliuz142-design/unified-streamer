@@ -13,8 +13,8 @@ import shutil
 import time
 from pathlib import Path
 
-from .config import settings
-from .queue_manager import DownloadQueue
+from config import settings
+from queue_manager import DownloadQueue
 
 log = logging.getLogger("cleanup")
 
